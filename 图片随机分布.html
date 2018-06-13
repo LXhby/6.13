@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    body,dl,dd,p,h1,h2,h3,h4,h5,h6{margin:0;}
+    ol,ul,li{margin:0;padding:0;list-style:none;}
+    img{border:none;vertical-align:top;}
+    #box{
+      width: 1000px;
+      height: 600px;
+      margin: auto;
+      border: 1px solid #000;
+    }
+    #box p{
+      float: left;
+      width: 500px;
+      height: 300px;
+      background:url("images/6.jpg") 0 0 /1000px 600px no-repeat;
+    }
+    #box i{
+      position: relative;
+      float: left;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="box">
+      <p></p>
+    </div>
+    <div id="box2"></div>
+  </div>
+</body>
+<script>
+  //获取元素
+  var oBox =document.getElementById("box"),
+      oP =document.getElementsByTagName("p")[0],
+      oBox2 =document.getElementById("box2");
+
+
+  //获取box的宽高和p标签的宽高
+  var oBoxwidth =parseFloat(getStyle(oBox)["width"]),
+       oBoxheight =parseFloat(getStyle(oBox)["height"]),
+      oPwidth =parseFloat(getStyle(oP)["width"]),
+      oPheight =parseFloat(getStyle(oP)["height"]);
+
+
+//p左边有多少个i
+  var grid1={
+      list:3,//行
+      column:5//列
+  };
+//计算i的宽高
+  var _width =(oBoxwidth-oPwidth)/grid1.column,
+      _height =(oPheight)/grid1.list;
+
+  //生成p左边的i
+  for (var i=0;i<grid1.list;i++){
+      for (var j=0;j<grid1.column;j++) {
+          var oI =document.createElement("i");
+          oI.style.width=_width+"px";
+          oI.style.height=_height+"px";
+          oI.style.backgroundImage ="url("+`images/6.jpg`+")";
+          oI.style.backgroundSize="1000px 600px";
+          oI.style.backgroundPositionX =`-${oPwidth+j*100}`+"px";
+          oI.style.backgroundPositionY =`-${i*100}`+"px";
+          oBox.appendChild(oI);
+      }
+  }
+  
+  //p下边有多少个i
+  var grid2={
+      list:3,//行
+      column:10//列
+  };
+  //计算i的宽高
+  var _width =(oBoxwidth)/grid2.column,
+      _height =(oBoxheight-oPheight)/grid2.list;
+
+  //生成p左边的i
+  for (var i=0;i<grid2.list;i++){
+      for (var j=0;j<grid2.column;j++) {
+          var oI =document.createElement("i");
+          oI.style.width=_width+"px";
+          oI.style.height=_height+"px";
+          oI.style.backgroundImage ="url("+`images/6.jpg`+")";
+          oI.style.backgroundSize="1000px 600px";
+          oI.style.backgroundPositionX =`-${j*100}`+"px";
+          oI.style.backgroundPositionY =`-${oPheight+i*100}`+"px";
+          oBox.appendChild(oI);
+      }
+  }
+  fn();
+  function fn() {
+      for (var k=0;k<46;k++){
+          var select =parseInt(Math.random()*46+1);
+          oBox2.appendChild(oBox.children[select]);
+          oBox.appendChild(oBox2.children[0]);
+      }
+  }
+  //获取样式兼容
+  function getStyle(ele){
+      return ele.currentStyle||getComputedStyle(ele);
+  }
+</script>
+</html>

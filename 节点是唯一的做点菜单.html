@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            float: left;
+            width: 200px;
+            min-height: 400px;
+            padding: 10px;
+            margin: 20px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+        div h2{
+            border-bottom: 1px solid #000;
+        }
+        div span{
+            display: block;
+            height: 30px;
+            background-color: #000;
+            font-size: 16px;
+            color: #fff;
+            line-height: 30px;
+            cursor: pointer;
+        }
+        div span +span{
+            margin-top: 10px;
+        }
+        div span:hover{
+            opacity: .5;
+        }
+    </style>
+</head>
+<body>
+        <div id="menue">
+            <h2>菜单</h2>
+            <span>西红柿炒鸡蛋</span>
+            <span>爆炒牛肉</span>
+            <span>土豆丝</span>
+            <span>肉末豆腐</span>
+            <span>鱼香肉丝</span>
+            <span>水煮肉片</span>
+        </div>
+       <div id="select">
+           <h2>已点</h2>
+       </div>
+</body>
+<script>
+    var oMenu =document.getElementById("menue"),
+        oSelect =document.getElementById("select"),
+        oSpan =document.getElementsByTagName("span");
+        for (var i=0;i<oSpan.length;i++){
+            oSpan[i].onclick =function () {
+                this.selectStatu =!this.selectStatu;//取反，一开始没有定义是undefined,取反之后变为真
+                if (this.selectStatu){
+                    oSelect.appendChild(this);
+                } else{
+                    oMenu.append(this);
+                }
+            }
+        } 
+</script>
+</html>
